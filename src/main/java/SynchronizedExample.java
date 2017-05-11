@@ -10,15 +10,15 @@ import java.util.Set;
  */
 public class SynchronizedExample {
 
-  private int counter;
-  private Object lock = new Object();
+  private static int counter;
+  private final Object lock = new Object();
 
   public static void main(String[] args) throws InterruptedException {
     new SynchronizedExample().test();
   }
 
-  public int increment() {
-    synchronized (lock){
+  public static int increment() {
+    synchronized (SynchronizedExample.class) {
       return counter++;
     }
   }
@@ -42,7 +42,7 @@ public class SynchronizedExample {
         }
       }
     }
-    if (isValid){
+    if (isValid) {
       System.out.println("No duplicates");
     }
   }
