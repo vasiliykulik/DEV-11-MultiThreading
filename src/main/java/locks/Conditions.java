@@ -28,7 +28,7 @@ public class Conditions {
         try {
 /*достаем значения */
           System.out.println("Taking out: " + transferQueue.take());
-          Thread.sleep(0);
+          Thread.sleep(1000);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
