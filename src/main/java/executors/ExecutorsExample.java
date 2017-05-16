@@ -8,7 +8,8 @@ import java.util.concurrent.*;
 public class ExecutorsExample {
 
   public static void main(String[] args) throws ExecutionException, InterruptedException {
-    new ExecutorsExample().testSubmit();
+    new ExecutorsExample().testException();
+    /*new ExecutorsExample().testSubmit();*/
     /*new ExecutorsExample().testExecutor();*/
   }
 
@@ -36,6 +37,24 @@ public class ExecutorsExample {
     System.out.println("Waiting for result");
     System.out.println("result " + f.get());
     f.get();
+    executorService.shutdown();
+  }
+
+  public void testException() throws ExecutionException, InterruptedException {
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    Future<String> f = executorService.submit(new Callable<String>() {
+      @Override
+      public String call() throws Exception {
+        throw new RuntimeException("Exception happened");
+      }
+    });
+    System.out.println("Waiting for result");
+    Thread.sleep(1000);
+    try {
+      System.out.println("result " + f.get());
+    } catch (ExecutionException e) {
+      System.out.println("Exception occurred");
+    }
     executorService.shutdown();
   }
 }
