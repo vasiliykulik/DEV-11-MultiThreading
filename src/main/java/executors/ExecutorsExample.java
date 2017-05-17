@@ -57,4 +57,10 @@ public class ExecutorsExample {
     }
     executorService.shutdown();
   }
+
+  public void testInvokeAny(){
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    executorService.invokeAny();
+
+  }
 }
